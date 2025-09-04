@@ -3,18 +3,11 @@ import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
-import { type NavItem } from '@/types';
-import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { type NavItem, type SharedData } from '@/types'; // Asegúrate que SharedData incluya los roles del usuario
+import { Link, usePage } from '@inertiajs/react';
+import { BookOpen, Folder, LayoutGrid, Printer, Tags, Utensils, Table } from 'lucide-react';
+import { route } from 'ziggy-js';
 import AppLogo from './app-logo';
-
-const mainNavItems: NavItem[] = [
-    {
-        title: 'Dashboard',
-        href: dashboard(),
-        icon: LayoutGrid,
-    },
-];
 
 const footerNavItems: NavItem[] = [
     {
@@ -30,6 +23,47 @@ const footerNavItems: NavItem[] = [
 ];
 
 export function AppSidebar() {
+    // Obtenemos los datos del usuario, incluyendo sus roles, desde las props compartidas de Inertia
+    const { auth } = usePage<SharedData>().props;
+    const userRoles = auth.user?.roles ?? [];
+
+    // --- Construimos la navegación principal dinámicamente según el rol ---
+    const mainNavItems: NavItem[] = [
+        {
+            title: 'Dashboard',
+            href: dashboard(),
+            icon: LayoutGrid,
+        },
+    ];
+
+    // Solo los Meseros y Administradores ven el Punto de Venta
+    if (userRoles.includes('Administrador') || userRoles.includes('Mesero')) {
+        mainNavItems.push({
+            title: 'Punto de Venta',
+            href: route('pos.index'),
+            icon: Printer,
+        });
+    }
+
+    // Solo los Administradores ven la gestión de Categorías y Productos
+    if (userRoles.includes('Administrador')) {
+        mainNavItems.push({
+            title: 'Categorías',
+            href: route('admin.categories.index'),
+            icon: Tags,
+        });
+        mainNavItems.push({
+            title: 'Productos',
+            href: route('admin.products.index'),
+            icon: Utensils,
+        });
+        mainNavItems.push({
+            title: 'Mesas',
+            href: route('admin.tables.index'),
+            icon: Table,
+        });
+    }
+
     return (
         <Sidebar collapsible="icon" variant="inset">
             <SidebarHeader>

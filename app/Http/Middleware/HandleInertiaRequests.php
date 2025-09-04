@@ -43,7 +43,16 @@ class HandleInertiaRequests extends Middleware
             'name' => config('app.name'),
             'quote' => ['message' => trim($message), 'author' => trim($author)],
             'auth' => [
-                'user' => $request->user(),
+                // Usamos una función anónima para que solo se ejecute cuando sea necesario
+                'user' => $request->user() ? [
+                    // Pasamos los atributos del usuario
+                    'id' => $request->user()->id,
+                    'name' => $request->user()->name,
+                    'email' => $request->user()->email,
+                    // ¡Y aquí está la magia!
+                    // Obtenemos los nombres de los roles y los pasamos como un array simple
+                    'roles' => $request->user()->getRoleNames(),
+                ] : null,
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
         ];
