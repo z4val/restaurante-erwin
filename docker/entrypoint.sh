@@ -13,8 +13,6 @@ php artisan route:clear || true
 php artisan view:clear || true
 php artisan event:clear || true
 
-# 2.1. Generar tipos de Wayfinder (ya con DB y .env cargados)
-php artisan wayfinder:generate || true
 # 3. Storage link
 php artisan storage:link || true
 
