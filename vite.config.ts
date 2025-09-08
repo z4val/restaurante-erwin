@@ -13,7 +13,11 @@ export default defineConfig({
         }),
         react(),
         tailwindcss(),
-        wayfinder(),
+        wayfinder({
+        routes: false,
+        actions: false,
+        formVariants: false,
+        }),
     ],
     esbuild: {
         jsx: 'automatic',
