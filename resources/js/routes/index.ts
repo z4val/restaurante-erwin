@@ -1,4 +1,5 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../wayfinder'
+import admin from './admin'
 /**
  * @see routes/web.php:12
  * @route '/'
@@ -239,3 +240,6 @@ logout.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: logout.url(options),
     method: 'post',
 })
+
+// Export admin routes
+export { admin }

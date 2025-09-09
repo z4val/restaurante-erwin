@@ -118,6 +118,7 @@ export default function Index({ categories, tables }: POSProps) {
                     if (selectedTable === tableId) {
                         setSelectedTable(null);
                     }
+                    router.reload({ only: ['tables'] })
                 },
             },
         );

@@ -50,6 +50,7 @@ class TableController extends Controller
 
         // Redirigimos de vuelta a la página del POS con un mensaje de éxito.
         // Inertia actualizará automáticamente el estado de las mesas en el frontend.
-        return redirect()->route('pos.index')->with('success', "Mesa {$table->name} liberada.");
+        // return redirect()->route('pos.index')->with('success', "Mesa {$table->name} liberada.");
+        return back()->with('success', "Mesa {$table->name} liberada.");
     }
 }

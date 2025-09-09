@@ -1,4 +1,4 @@
-import PasswordController from '@/actions/App/Http/Controllers/Settings/PasswordController';
+// import PasswordController from '@/actions/App/Http/Controllers/Settings/PasswordController';
 import InputError from '@/components/input-error';
 import AppLayout from '@/layouts/app-layout';
 import SettingsLayout from '@/layouts/settings/layout';
@@ -33,18 +33,16 @@ export default function Password() {
                     <HeadingSmall title="Update password" description="Ensure your account is using a long, random password to stay secure" />
 
                     <Form
-                        {...PasswordController.update.form()}
-                        options={{
-                            preserveScroll: true,
-                        }}
+                        method="put"
+                        action="/password"
+                        options={{ preserveScroll: true }}
                         resetOnError={['password', 'password_confirmation', 'current_password']}
                         resetOnSuccess
                         onError={(errors) => {
                             if (errors.password) {
                                 passwordInput.current?.focus();
                             }
-
-                            if (errors.current_password) {
+                                                if (errors.current_password) {
                                 currentPasswordInput.current?.focus();
                             }
                         }}

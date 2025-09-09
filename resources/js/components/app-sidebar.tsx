@@ -5,7 +5,7 @@ import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, Sid
 import { dashboard } from '@/routes';
 import { type NavItem, type SharedData } from '@/types'; // Asegúrate que SharedData incluya los roles del usuario
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, Printer, Tags, Utensils, Table } from 'lucide-react';
+import { BookOpen, Folder, LayoutGrid, Printer, Tags, Utensils, Table, ShoppingCart } from 'lucide-react';
 import { route } from 'ziggy-js';
 import AppLogo from './app-logo';
 
@@ -61,6 +61,11 @@ export function AppSidebar() {
             title: 'Mesas',
             href: route('admin.tables.index'),
             icon: Table,
+        });
+        mainNavItems.push({
+            title: 'Pedidos',
+            href: route('admin.orders.index'),
+            icon: ShoppingCart,
         });
     }
 
