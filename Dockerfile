@@ -24,7 +24,7 @@ COPY . .
 # Instalar dependencias PHP y Node
 RUN composer install --no-dev --optimize-autoloader \
     && npm ci \
-    && php artisan wayfinder:generate \
+    && php artisan wayfinder:generate --no-db \
     && npm run build
 
 # Ajustar permisos para que Render no necesite root
