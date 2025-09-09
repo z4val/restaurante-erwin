@@ -15,7 +15,8 @@ return [
     */
 
     'postmark' => [
-        'token' => env('POSTMARK_TOKEN'),
+        'token' => env('POSTMARK_TOKEN', null),
+        'message_stream_id' => env('POSTMARK_MESSAGE_STREAM_ID', null),
     ],
 
     'ses' => [
@@ -25,13 +26,13 @@ return [
     ],
 
     'resend' => [
-        'key' => env('RESEND_KEY'),
+        'key' => env('RESEND_KEY', null),
     ],
 
     'slack' => [
         'notifications' => [
-            'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),
-            'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
+            'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN', null),
+            'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL', null),
         ],
     ],
 
