@@ -15,10 +15,11 @@ php artisan event:clear || true
 
 # 2.1. Generar tipos de Wayfinder (ya con DB y .env cargados)
 php artisan wayfinder:generate || true
+
 # 3. Storage link
 php artisan storage:link || true
 
-# 4. Migraciones (solo si quieres automáticas)
+# 4. Migraciones (si quieres automáticas en cada deploy, descomenta la línea)
 # php artisan migrate --force || true
 
 # 5. Cachear con variables de entorno reales
@@ -27,13 +28,6 @@ php artisan route:cache
 php artisan view:cache
 php artisan event:cache
 
-# 6. Validar certificado
-if [ -f "/var/www/html/$MYSQL_ATTR_SSL_CA" ]; then
-  echo "Certificado CA encontrado en: /var/www/html/$MYSQL_ATTR_SSL_CA"
-else
-  echo "⚠️ Advertencia: No se encontró el archivo CA en /var/www/html/$MYSQL_ATTR_SSL_CA"
-fi
-
-# 7. Levantar servidor
+# 6. Levantar servidor
 echo "Servidor Laravel corriendo en puerto $PORT"
 exec php artisan serve --host 0.0.0.0 --port $PORT

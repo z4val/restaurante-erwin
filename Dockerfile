@@ -5,7 +5,7 @@ FROM php:8.2-fpm
 RUN apt-get update && apt-get install -y \
     git curl libpng-dev libjpeg-dev libfreetype6-dev libzip-dev unzip zip \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd pdo pdo_mysql zip bcmath
+    && docker-php-ext-install gd pdo pdo_pgsql zip bcmath
 
 # Instalar Node.js (para Vite/React)
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
@@ -24,10 +24,9 @@ COPY . .
 # Instalar dependencias PHP y Node
 RUN composer install --no-dev --optimize-autoloader \
     && npm ci \
-    && php artisan wayfinder:generate --skip-actions \
-    && npm run build
+    && npm run build   # 👈 ya sin wayfinder aquí
 
-# Ajustar permisos para que Render no necesite root
+# Ajustar permisos
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
@@ -38,8 +37,5 @@ EXPOSE 10000
 # Entrypoint simplificado
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
-
-#bundle
-COPY storage/certs/singlestore_bundle.pem /var/www/html/storage/certs/singlestore_bundle.pem
 
 ENTRYPOINT ["entrypoint.sh"]
