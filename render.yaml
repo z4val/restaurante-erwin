@@ -7,13 +7,13 @@ services:
     preDeployCommand: php artisan migrate --force
     envVars:
       - key: DB_CONNECTION
-        value: mysql
+        value: pgsql
       - key: DB_HOST
-        value: svc-3482219c-a389-4079-b18b-d50662524e8a-shared-dml.aws-virginia-6.svc.singlestore.com
+        value: ep-falling-poetry-adrwnnv5-pooler.c-2.us-east-1.aws.neon.tech
       - key: DB_PORT
-        value: 3333
+        value: 5432
       - key: DB_DATABASE
-        value: db_arnie_7c14c
+        value: restaurantdb
       - key: DB_USERNAME
         sync: false
       - key: DB_PASSWORD
