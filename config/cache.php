@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('CACHE_STORE', 'database'),
+    'default' => env('CACHE_STORE', 'file'),
 
     /*
     |--------------------------------------------------------------------------
@@ -40,10 +40,10 @@ return [
 
         'database' => [
             'driver' => 'database',
-            'connection' => env('DB_CACHE_CONNECTION'),
-            'table' => env('DB_CACHE_TABLE', 'cache'),
-            'lock_connection' => env('DB_CACHE_LOCK_CONNECTION'),
-            'lock_table' => env('DB_CACHE_LOCK_TABLE'),
+            'connection' => env('DB_CACHE_CONNECTION', null),
+            'table' => env('DB_CACHE_TABLE', 'cache', 'cache'),
+            'lock_connection' => env('DB_CACHE_LOCK_CONNECTION', null),
+            'lock_table' => env('DB_CACHE_LOCK_TABLE', 'cache_locks'),
         ],
 
         'file' => [
@@ -54,10 +54,10 @@ return [
 
         'memcached' => [
             'driver' => 'memcached',
-            'persistent_id' => env('MEMCACHED_PERSISTENT_ID'),
+            'persistent_id' => env('MEMCACHED_PERSISTENT_ID', null),
             'sasl' => [
-                env('MEMCACHED_USERNAME'),
-                env('MEMCACHED_PASSWORD'),
+                env('MEMCACHED_USERNAME', null),
+                env('MEMCACHED_PASSWORD', null),
             ],
             'options' => [
                 // Memcached::OPT_CONNECT_TIMEOUT => 2000,
