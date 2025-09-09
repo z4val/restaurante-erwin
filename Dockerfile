@@ -4,6 +4,7 @@ FROM php:8.2-fpm
 # Instalar dependencias del sistema
 RUN apt-get update && apt-get install -y \
     git curl libpng-dev libjpeg-dev libfreetype6-dev libzip-dev unzip zip \
+    libpq-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd pdo pdo_pgsql zip bcmath
 
