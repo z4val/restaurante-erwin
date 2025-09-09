@@ -15,7 +15,9 @@
         "laravel/tinker": "^2.10.1",
         "laravel/wayfinder": "^0.1.9",
         "spatie/laravel-permission": "^6.21",
-        "tightenco/ziggy": "^2.5"
+        "tightenco/ziggy": "^2.5",
+        "ext-pdo": "*",
+        "ext-pdo_mysql": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
